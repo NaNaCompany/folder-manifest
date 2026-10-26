@@ -1,0 +1,59 @@
+{
+  "slug": "folder-manifest",
+  "url": "https://nanalab.kr/folder-manifest/",
+  "languages": [
+    "ko",
+    "en",
+    "es",
+    "zh",
+    "ja",
+    "de"
+  ],
+  "locales": {
+    "ko": {
+      "name": "폴더 납품 목록 생성",
+      "description": "폴더의 상대 경로·크기·수정시각과 선택한 SHA-256을 정리해 CSV·Markdown 목록으로 저장하세요.",
+      "image_alt": "폴더 납품 목록 생성"
+    },
+    "en": {
+      "name": "Folder Delivery Manifest",
+      "description": "Create CSV or Markdown manifests with relative paths, sizes, modification times and optional SHA-256 hashes.",
+      "image_alt": "Folder Delivery Manifest"
+    },
+    "es": {
+      "name": "Manifiesto de carpeta",
+      "description": "Crea inventarios CSV o Markdown con rutas relativas, tamaños, fechas de modificación y hashes SHA-256 opcionales.",
+      "image_alt": "Manifiesto de carpeta"
+    },
+    "zh": {
+      "name": "文件夹交付清单",
+      "description": "整理文件夹的相对路径、大小、修改时间及可选 SHA-256，导出 CSV 或 Markdown 清单。",
+      "image_alt": "文件夹交付清单"
+    },
+    "ja": {
+      "name": "フォルダー納品リスト",
+      "description": "フォルダー内の相対パス、サイズ、更新日時、任意のSHA-256をCSVやMarkdownの一覧にできます。",
+      "image_alt": "フォルダー納品リスト"
+    },
+    "de": {
+      "name": "Ordner-Übergabeliste",
+      "description": "Erstellen Sie CSV- oder Markdown-Listen mit relativen Pfaden, Größen, Änderungszeiten und optionalen SHA-256-Hashes.",
+      "image_alt": "Ordner-Übergabeliste"
+    },
+    "fr": {
+      "name": "Inventaire de dossier",
+      "description": "Créez un inventaire CSV ou Markdown avec les chemins relatifs, tailles, dates de modification et empreintes SHA-256 facultatives.",
+      "image_alt": "Inventaire de dossier"
+    },
+    "pt": {
+      "name": "Inventário de pasta",
+      "description": "Crie inventários CSV ou Markdown com caminhos relativos, tamanhos, datas de modificação e hashes SHA-256 opcionais.",
+      "image_alt": "Inventário de pasta"
+    },
+    "ru": {
+      "name": "Опись папки",
+      "description": "Создавайте описи CSV или Markdown с относительными путями, размерами, временем изменения и необязательными хешами SHA-256.",
+      "image_alt": "Опись папки"
+    }
+  }
+}

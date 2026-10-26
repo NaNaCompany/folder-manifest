@@ -1,0 +1,78 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="../"><title>Manifiesto de carpeta · NaNa Lab</title><link rel="stylesheet" href="style.css">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Crea inventarios CSV o Markdown con rutas relativas, tamaños, fechas de modificación y hashes SHA-256 opcionales.">
+<link rel="canonical" href="https://nanalab.kr/folder-manifest/es/">
+<link rel="alternate" hreflang="ko" href="https://nanalab.kr/folder-manifest/">
+<link rel="alternate" hreflang="en" href="https://nanalab.kr/folder-manifest/en/">
+<link rel="alternate" hreflang="es" href="https://nanalab.kr/folder-manifest/es/">
+<link rel="alternate" hreflang="zh" href="https://nanalab.kr/folder-manifest/zh/">
+<link rel="alternate" hreflang="ja" href="https://nanalab.kr/folder-manifest/ja/">
+<link rel="alternate" hreflang="de" href="https://nanalab.kr/folder-manifest/de/">
+<link rel="alternate" hreflang="x-default" href="https://nanalab.kr/folder-manifest/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nanalab.kr/folder-manifest/es/">
+<meta property="og:title" content="Manifiesto de carpeta">
+<meta property="og:description" content="Crea inventarios CSV o Markdown con rutas relativas, tamaños, fechas de modificación y hashes SHA-256 opcionales.">
+<meta property="og:image" content="https://nanalab.kr/folder-manifest/og/es.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Manifiesto de carpeta">
+<meta name="twitter:description" content="Crea inventarios CSV o Markdown con rutas relativas, tamaños, fechas de modificación y hashes SHA-256 opcionales.">
+<meta name="twitter:image" content="https://nanalab.kr/folder-manifest/og/es.jpg">
+<link rel="stylesheet" href="public.css">
+
+<!-- NaNa publisher: AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9767176956440077"
+        crossorigin="anonymous"></script>
+<!-- /NaNa publisher: AdSense -->
+<!-- NaNa publisher: GTM -->
+<script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })
+            (window, document, 'script', 'dataLayer', 'GTM-NV2WWQXB');
+    </script>
+<!-- /NaNa publisher: GTM -->
+<!-- NaNa publisher: Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZYSF0173P"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-2ZYSF0173P');
+    </script>
+<!-- /NaNa publisher: Analytics -->
+</head><body>
+<!-- NaNa publisher: GTM fallback -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV2WWQXB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+<!-- /NaNa publisher: GTM fallback -->
+<main><header><a class="brand" href="./">LOCAL / FILE TOOLS</a><span class="badge" data-t="badge"></span><label><span data-t="language"></span> <select id="language" aria-label="Idioma"><option value="ko">한국어</option><option value="en">English</option><option value="es">Español</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="de">Deutsch</option></select></label></header><section class="hero"><p class="eyebrow">FOLDER MANIFEST</p><h1 data-t="hero" style="white-space:pre-line"></h1><p data-t="intro"></p></section><section class="panel"><div class="upload"><div class="folder-icon" aria-hidden="true">▱</div><h2 data-t="choose"></h2><p data-t="private"></p><div class="buttons"><label class="button primary"><span data-t="folder"></span><input id="folder" type="file" webkitdirectory multiple></label><label class="button"><span data-t="file"></span><input id="files" type="file" multiple></label><button id="example" data-t="example"></button></div><small data-t="limits"></small></div><div class="options"><label><input id="exclude" type="checkbox" checked><span data-t="exclude"></span></label><label><input id="hash" type="checkbox"><span data-t="hash"></span></label><label><input id="safe" type="checkbox" checked><span data-t="safe"></span></label></div><div class="actionbar"><button class="primary" id="generate" data-t="generate"></button><button id="clear" data-t="clear"></button><span id="selection" data-t="noSelection"></span></div><p id="status" role="status" aria-live="polite" data-t="initial"></p></section><section class="panel result"><div class="result-top"><div><p class="eyebrow">DELIVERY INDEX</p><h2 data-t="result"></h2></div><div class="buttons"><button id="csv" disabled data-t="csv"></button><button id="md" disabled data-t="md"></button><button id="copy" disabled data-t="copy"></button></div></div><div class="metrics"><div><strong id="count">0</strong><span data-t="files"></span></div><div><strong id="size">0 B</strong><span data-t="total"></span></div><div><strong id="hashed">0</strong><span data-t="hashed"></span></div></div><div class="table-wrap"><table><thead><tr><th data-t="path"></th><th data-t="extension"></th><th data-t="size"></th><th data-t="modified"></th><th>SHA-256</th></tr></thead><tbody id="rows"><tr><td colspan="5" class="empty" data-t="placeholder"></td></tr></tbody></table></div><p class="footnote" data-t="preview"></p></section><details><summary data-t="helpTitle"></summary><p data-t="help1"></p><p data-t="help2"></p><p><a href="https://www.w3.org/TR/WebCryptoAPI/" target="_blank" rel="noreferrer">W3C Web Cryptography API</a> · <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noreferrer">RFC 4180 (CSV)</a></p></details><footer><span data-t="footer"></span><a href="https://nanalab.kr/apps/">More Apps ↗</a></footer></main><script type="module" src="app.js"></script>
+<!-- NaNa publisher: Cloudflare fallback -->
+<script>
+(function () {
+  function ensureBeacon() {
+    // Cloudflare may inject its beacon at the edge. Reuse that script when present.
+    if (document.querySelector('script[src*="static.cloudflareinsights.com/beacon.min.js"]')) return;
+    var beacon = document.createElement('script');
+    beacon.defer = true;
+    beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    beacon.setAttribute('data-cf-beacon', JSON.stringify({token: '9f3423bb0d034d91bbe1a12afeff2429'}));
+    document.head.appendChild(beacon);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensureBeacon, {once: true});
+  else ensureBeacon();
+})();
+</script>
+<!-- /NaNa publisher: Cloudflare fallback -->
+</body></html>

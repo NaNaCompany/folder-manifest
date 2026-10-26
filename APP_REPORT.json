@@ -1,0 +1,53 @@
+{
+  "ideaId": "W009",
+  "slug": "folder-manifest",
+  "title": "폴더 납품 목록 생성",
+  "ready": true,
+  "summary": "폴더·파일을 브라우저에서 읽어 상대 경로, 확장자, 크기, UTC 수정시각, 선택적 SHA-256 목록을 생성합니다.",
+  "features": [
+    "폴더·다중파일 선택과 즉시 예제",
+    "점(.) 숨김 경로 선택 제외",
+    "SHA-256 선택 계산",
+    "CSV UTF-8 BOM·수식 보호",
+    "Markdown 다운로드·복사",
+    "2,000파일·500 MiB 상한"
+  ],
+  "tests": [
+    {
+      "name": "RTK Node --check dist/app.js exit 0",
+      "pass": true
+    },
+    {
+      "name": "Node fixtures 5 passed, 0 failed: six routes/catalogs, paths, bounds, exports, SHA-256",
+      "pass": true
+    }
+  ],
+  "limitations": [
+    "브라우저 시각·상호작용 QA 미수행",
+    "폴더 선택 브라우저 지원 차이",
+    "운영체제 숨김 속성·빈 폴더 확인 불가",
+    "SHA-256 파일당 100 MiB, secure context 필요",
+    "미리보기 300행, 다운로드 전체"
+  ],
+  "sources": [
+    "https://www.w3.org/TR/WebCryptoAPI/",
+    "https://www.rfc-editor.org/rfc/rfc4180"
+  ],
+  "entry": "dist/index.html",
+  "languages": [
+    "ko",
+    "en",
+    "es",
+    "zh",
+    "ja",
+    "de"
+  ],
+  "languageRoutes": [
+    "/",
+    "/en/",
+    "/es/",
+    "/zh/",
+    "/ja/",
+    "/de/"
+  ]
+}
