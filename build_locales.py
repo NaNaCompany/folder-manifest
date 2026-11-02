@@ -1,4 +1,22 @@
 import json, pathlib
+
+# Shared book banner adapter; the campaign itself is maintained in src_cdn.
+def _shared_book_banner(value):
+    if isinstance(value, dict) and any(isinstance(key, str) and key.endswith('.html') for key in value):
+        return {key: _shared_book_banner(item) for key, item in value.items()}
+    if not isinstance(value, str) or not value.lstrip('\ufeff \r\n\t').lower().startswith(('<!doctype html', '<html')) or 'https://nanalab.kr/src_cdn/banner/astra.js' in value:
+        return value
+    snippet = '<!-- NaNa shared book banner --><script defer src="https://nanalab.kr/src_cdn/banner/astra.js"></script><!-- /NaNa shared book banner -->'
+    import re
+    opening = re.search(r'<head\b[^>]*>', value, re.I)
+    if opening:
+        return value[:opening.end()] + snippet + value[opening.end():]
+    for closing in ['</body>', '</html>']:
+        at = value.lower().find(closing)
+        if at >= 0:
+            return value[:at] + snippet + value[at:]
+    return value + snippet
+
 root=pathlib.Path(__file__).parent
 langs=['ko','en','es','zh','ja','de']
 data=r'''title|폴더 납품 목록 생성|Folder Delivery Manifest|Manifiesto de carpeta|文件夹交付清单|フォルダー納品リスト|Ordner-Übergabeliste
@@ -62,16 +80,16 @@ for line in data.splitlines():
     for l,v in zip(langs,values): catalog[l][key]=v.replace('\\n','\n')
 for l in langs:
     t=catalog[l];t['headers']=[t['path'],t['extension'],t['size']+' (bytes)',t['modified'],'SHA-256']
-(root/'dist/locales.js').write_text('export const catalog='+json.dumps(catalog,ensure_ascii=False)+';\n',encoding='utf-8')
+(root/'dist/locales.js').write_text(_shared_book_banner(('export const catalog='+json.dumps(catalog,ensure_ascii=False)+';\n')),encoding='utf-8')
 template='''<!doctype html><html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><base href="{base}"><title>{title}</title><link rel="stylesheet" href="style.css"></head><body><main><header><a class="brand" href="./">LOCAL / FILE TOOLS</a><span class="badge" data-t="badge"></span><label><span data-t="language"></span> <select id="language" aria-label="{language}"><option value="ko">한국어</option><option value="en">English</option><option value="es">Español</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="de">Deutsch</option></select></label></header><section class="hero"><p class="eyebrow">FOLDER MANIFEST</p><h1 data-t="hero" style="white-space:pre-line"></h1><p data-t="intro"></p></section><section class="panel"><div class="upload"><div class="folder-icon" aria-hidden="true">▱</div><h2 data-t="choose"></h2><p data-t="private"></p><div class="buttons"><label class="button primary"><span data-t="folder"></span><input id="folder" type="file" webkitdirectory multiple></label><label class="button"><span data-t="file"></span><input id="files" type="file" multiple></label><button id="example" data-t="example"></button></div><small data-t="limits"></small></div><div class="options"><label><input id="exclude" type="checkbox" checked><span data-t="exclude"></span></label><label><input id="hash" type="checkbox"><span data-t="hash"></span></label><label><input id="safe" type="checkbox" checked><span data-t="safe"></span></label></div><div class="actionbar"><button class="primary" id="generate" data-t="generate"></button><button id="clear" data-t="clear"></button><span id="selection" data-t="noSelection"></span></div><p id="status" role="status" aria-live="polite" data-t="initial"></p></section><section class="panel result"><div class="result-top"><div><p class="eyebrow">DELIVERY INDEX</p><h2 data-t="result"></h2></div><div class="buttons"><button id="csv" disabled data-t="csv"></button><button id="md" disabled data-t="md"></button><button id="copy" disabled data-t="copy"></button></div></div><div class="metrics"><div><strong id="count">0</strong><span data-t="files"></span></div><div><strong id="size">0 B</strong><span data-t="total"></span></div><div><strong id="hashed">0</strong><span data-t="hashed"></span></div></div><div class="table-wrap"><table><thead><tr><th data-t="path"></th><th data-t="extension"></th><th data-t="size"></th><th data-t="modified"></th><th>SHA-256</th></tr></thead><tbody id="rows"><tr><td colspan="5" class="empty" data-t="placeholder"></td></tr></tbody></table></div><p class="footnote" data-t="preview"></p></section><details><summary data-t="helpTitle"></summary><p data-t="help1"></p><p data-t="help2"></p><p><a href="https://www.w3.org/TR/WebCryptoAPI/" target="_blank" rel="noreferrer">W3C Web Cryptography API</a> · <a href="https://www.rfc-editor.org/rfc/rfc4180" target="_blank" rel="noreferrer">RFC 4180 (CSV)</a></p></details><footer><span data-t="footer"></span><a href="https://nanalab.kr/apps/">More Apps ↗</a></footer></main><script type="module" src="app.js"></script></body></html>'''
 for lang in langs:
     out=root/'dist'/('' if lang=='ko' else lang);out.mkdir(exist_ok=True)
     html=template.replace('{lang}',lang).replace('{base}','./' if lang=='ko' else '../').replace('{title}',catalog[lang]['title']).replace('{language}',catalog[lang]['language'])
-    (out/'index.html').write_text(html,encoding='utf-8')
+    (out/'index.html').write_text(_shared_book_banner((html)),encoding='utf-8')
 core=root/'dist/core.js';s=core.read_text(encoding='utf-8')
 for original,key in [(catalog['ko'][k],k) for k in ['empty','countLimit','sizeLimit','secure','hashLimit']]:s=s.replace("Error('"+original+"')","Error('"+key+"')")
 s=s.replace("export function csv(rows,safe=true){return [['경로','확장자','크기(bytes)','수정시각(UTC)','SHA-256']", "export function csv(rows,safe=true,headers=['경로','확장자','크기(bytes)','수정시각(UTC)','SHA-256']){return [headers")
 start=s.index('export function markdown(');end=s.index('export function formatBytes',start)
 s=s[:start]+'''export function markdown(rows,labels={title:'폴더 납품 목록',note:'크기 단위: bytes · 수정시각: UTC · SHA-256 빈칸: 미계산',headers:['경로','확장자','크기(bytes)','수정시각(UTC)','SHA-256']}){return '# '+labels.title+'\\n\\n'+labels.note+'\\n\\n| '+labels.headers.join(' | ')+' |\\n| --- | --- | ---: | --- | --- |\\n'+rows.map(r=>'| '+[r.path,r.ext,r.size,r.modified,r.hash].map(mdEscape).join(' | ')+' |').join('\\n')+'\\n';}
 '''+s[end:]
-core.write_text(s,encoding='utf-8')
+core.write_text(_shared_book_banner((s)),encoding='utf-8')
